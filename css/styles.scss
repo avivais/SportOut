@@ -1,0 +1,163 @@
+$left-color: #0095FF;
+$right-color: #CC0000;
+$primary-bg-color: #444;
+$flip-lg-factor: 1;
+$flip-md-factor: .6;
+$flip-sm-factor: .3;
+body {
+    padding-top: 70px;
+    color: white;
+}
+input {
+    color: black;
+}
+.left-color {
+    background-color: $left-color;
+}
+.right-color {
+    background-color: $right-color;
+}
+ul.flip {
+    display: inline;
+    list-style: none;
+    position: relative;
+    margin: 5px;
+    width: 60px;
+    height: 90px;
+    font-size: 80px;
+    font-weight: bold;
+    line-height: 87px;
+    border-radius: 6px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, .7);
+    li {
+        z-index: 1;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        a {
+            display: block;
+            height: 100%;
+            perspective: 200px;
+            div {
+                z-index: 1;
+                position: absolute;
+                left: 0;
+                width: 100%;
+                height: 50%;
+                overflow: hidden;
+                div.inn {
+                    position: absolute;
+                    left: 0;
+                    z-index: 1;
+                    width: 100%;
+                    height: 200%;
+                    color: #ccc;
+                    text-shadow: 0 1px 2px #000;
+                    text-align: center;
+                    background-color: #333;
+                    border-radius: 6px;
+                }
+            }
+            div.up {
+                transform-origin: 50% 100%;
+                top: 0;
+                div.inn {
+                    top: 0;
+                }
+            }
+            div.up:after {
+                content: "";
+                position:absolute;
+                top:44px;
+                left:0;
+                z-index: 5;
+                width: 100%;
+                height: 3px;
+                background-color: rgba(0,0,0,.4);
+            }
+            div.down {
+                transform-origin: 50% 0%;
+                bottom: 0;
+                div.inn {
+                    bottom: 0;
+                }
+            }
+        }
+    }
+    li:first-child {
+        z-index: 2;
+    }
+}
+ul.flip.flip-sm {
+    padding: 0px 12px;
+    width: ceil($flip-sm-factor * 60px);
+    height: ceil($flip-sm-factor * 90px);
+    font-size: ceil($flip-sm-factor * 80px);
+    margin: ceil($flip-sm-factor * 5px);
+    line-height: ceil($flip-sm-factor * 87px);
+    li a div.up:after {
+        top: floor($flip-sm-factor * 44px);
+        height: 1px;
+    }
+}
+ul.flip.flip-md {
+    width: ceil($flip-md-factor * 60px);
+    height: ceil($flip-md-factor * 90px);
+    font-size: ceil($flip-md-factor * 80px);
+    margin: ceil($flip-md-factor * 5px);
+    line-height: ceil($flip-md-factor * 87px);
+    li a div.up:after {
+        top: floor($flip-md-factor * 44px);
+        height: 1px;
+    }
+}
+.picker__table {
+    background-color: white;
+    color: black;
+    th {
+        text-align: center;
+    }
+}
+.picker__box {
+    border-radius: 0;
+}
+#finalScore {
+    margin-bottom: 15px;
+    > div {
+        padding: 10px;
+    }
+    #leftScore {
+        background-color: $left-color;
+    }
+    #rightScore {
+        background-color: $right-color;
+    }
+}
+#boxScore {
+    .team-name {
+        padding: 5px;
+        font-family: 'Sigmar One';
+    }
+    .player-name {
+        padding-left: 5px;
+        font-family: 'Voltaire';
+    }
+    .player-row {
+        border-bottom: 1px solid $primary-bg-color;
+        padding: 5px 0;
+    }
+    .player-row:hover {
+        background-color: #666;
+    }
+    .headers {
+        background-color: $primary-bg-color;
+        div {
+            padding: 5px;
+        }
+    }
+    #leftTeam,#rightTeam {
+        margin-bottom: 25px;
+    }
+}
