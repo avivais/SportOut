@@ -1,3 +1,4 @@
-$( document ).ready( function() {
-    $( '#testPicker' ).pickadate({});
+$( document ).ready( function (){
+	$( '#testPicker' ).pickadate( {} );
+    var x;
 } );

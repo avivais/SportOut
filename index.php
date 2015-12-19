@@ -10,7 +10,7 @@
     <link href='https://fonts.googleapis.com/css?family=Voltaire|Sigmar+One' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="css/pickadate/default.css">
     <link rel="stylesheet" href="css/pickadate/default.date.css">
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/styles.min.css">
 
     <title>SportOut</title>
 </head>
@@ -185,9 +185,9 @@
     </div>
 
     <div class="container-fluid players-list-container">
-        <div class="row player-row">Roy Sharf</div>
-        <div class="row player-row">Avi Vaisenberger</div>
-        <div class="row player-row">Yoni Reshef</div>
+        <div class="row player-row">
+            <div class="col-xs-1">Roy Sharf</div>
+        </div>
     </div>
     <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
