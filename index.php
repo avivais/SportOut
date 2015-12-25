@@ -63,7 +63,7 @@
                             <li>
                                 <a href="#">
                                     <div class="up">
-                                        <div class="shadow"></div>
+                                            <div class="shadow"></div>
                                         <div class="inn">1</div>
                                     </div>
                                     <div class="down">
@@ -184,9 +184,15 @@
         <input id="testPicker">
     </div>
 
-    <div class="container-fluid players-list-container">
+    <div class="container-fluid players-list-container" data-upto="2">
         <div class="row player-row">
-            <div class="col-xs-1">Roy Sharf</div>
+            <div class="col-xs-12">Roy Sharf</div>
+        </div>
+        <div class="row player-row">
+            <div class="col-xs-12">Avi Vaisenberger</div>
+        </div>
+        <div class="row player-row">
+            <div class="col-xs-12">Adi Lieberman</div>
         </div>
     </div>
     <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
