@@ -1,5 +1,6 @@
 if ( !window.PlayersController ) {
     window.PlayersController = {
+        selected: {},
         getData: function ( type, successCallback, errorCallback ) {
             $.ajax( {
                 url: 'getPlayers.php',
@@ -9,11 +10,16 @@ if ( !window.PlayersController ) {
             } ).then( successCallback, errorCallback );
         },
         addToContainer: function ( $container, type, okCallback, cancelCallback ) {
+            var self = this;
             $playersListContainer = $( '<div class="container-fluid players-list-container">' )
                 .append(
                     $( '<div class="container-fluid players-list">' ),
                     $( '<div class="overlay-container">' )
                     .append(
+                        $( '<div class="container-fluid selected-container">' )
+                        .append(
+                            $( '<div class="selected-players">' )
+                        ),
                         $( '<div class="container-fluid overlay-controls-container">' )
                         .append(
                             $( '<div class="row buttons-container">' )
@@ -44,13 +50,17 @@ if ( !window.PlayersController ) {
                     );
                 } );
                 $playersListContainer.find( '.btn-ok' ).click( function () {
-                    selectedPlayers = [];
-                    $playersListContainer.find( '.selected .player-data' ).each( function () {
-                        selectedPlayers.push( $( this ).data( 'player-id' ) );
-                    } );
-                    okCallback.call( this, selectedPlayers );
+                    $playersListContainer.find( '.overlay-container' ).toggle();
+                    $playersListContainer.find( '.players-list' ).toggleClass( 'blur' );
+                    $container.toggleClass( 'no-scroll' );
+                    okCallback.call( this, self.selected.ids );
                 } );
-                $playersListContainer.find( '.btn-cancel' ).click( cancelCallback );
+                $playersListContainer.find( '.btn-cancel' ).click( function () {
+                    $playersListContainer.find( '.overlay-container' ).toggle();
+                    $playersListContainer.find( '.players-list' ).toggleClass( 'blur' );
+                    $container.toggleClass( 'no-scroll' );
+                    cancelCallback.call( this );
+                } );
                 $playersListContainer.find( '.player-row' ).click( function () {
                     var $this = $( this );
                     $container = $this.closest( '.players-list-container' );
@@ -74,9 +84,27 @@ if ( !window.PlayersController ) {
                             }, 1000 );
                         }
                     } else if ( selectedCount == maxSelect ) {
+                        self.selected = {
+                            'names': $( '.selected .player-data' ).map( function () {
+                                return $( this ).text();
+                            } ),
+                            'ids': $( '.selected .player-data' ).map( function () {
+                                return $( this ).data( 'player-id' );
+                            } )
+                        };
+                        var selectedElements = [];
+                        self.selected.names.each( function() {
+                            selectedElements.push(
+                                $( '<div class="row">')
+                                .append(
+                                    $( '<div class="col-xs-12 text-center">' ).text( this )
+                                )
+                            );
+                        } );
+                        $playersListContainer.find( '.selected-players' ).empty().append( selectedElements );
                         $playersListContainer.find( '.overlay-container' ).toggle();
                         $playersListContainer.find( '.players-list' ).toggleClass( 'blur' );
-                        $( 'body' ).toggleClass( 'no-scroll' );
+                        $container.toggleClass( 'no-scroll' );
                     }
 
                 } );
