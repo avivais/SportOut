@@ -147,18 +147,18 @@ ul.flip.flip-md {
     border-radius: 0;
 }
 
-.players-list-container {
+.players-list {
     .row {
-        padding: 10px 5px;
+        padding      : 10px 5px;
         border-bottom: 1px solid $primary-bg-color;
-        cursor: pointer;
+        cursor       : pointer;
     }
+
     .row:first-child {
         border-top: 1px solid $primary-bg-color;
     }
-    .row:hover {
 
-    }
+    .row:hover {}
 }
 
 #finalScore {
@@ -215,12 +215,47 @@ ul.flip.flip-md {
         margin-bottom: 25px;
     }
 }
+
 .popover {
     background-color: $alert-color;
 }
+
 .popover.bottom>.arrow:after {
     border-bottom-color: $alert-color;
 }
+
 .popover.top>.arrow:after {
     border-top-color: $alert-color;
+}
+
+.blur {
+    -webkit-filter: blur(5px);
+}
+
+.no-scroll {
+    overflow: hidden;
+}
+
+.overlay-container {
+    display         : none;
+    height          : 100%;
+    width           : 100%;
+    position        : fixed;
+    top             : 0;
+    left            : 0;
+    background-color: rgba(200,200,200,0.6);
+
+    .overlay-controls-container {
+        position         : absolute;
+        width            : 100%;
+        top              : 50%;
+        left             : 50%;
+        -webkit-transform: translate3d(-50%,-50%,0);
+        font-size        : 50px;
+        font-weight      : bold;
+
+        button {
+            width: 90%;
+        }
+    }
 }
