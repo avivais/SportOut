@@ -43,12 +43,12 @@ if ( !window.PlayersController ) {
                         )
                     );
                 } );
-                $playersListContainer.find( '.btn-ok' ).click( function() {
+                $playersListContainer.find( '.btn-ok' ).click( function () {
                     selectedPlayers = [];
-                    $playersListContainer.find( '.selected .player-data' ).each(function() {
-                        selectedPlayers.push($(this).data('player-id'));
-                    })
-                    okCallback.call(this, selectedPlayers);
+                    $playersListContainer.find( '.selected .player-data' ).each( function () {
+                        selectedPlayers.push( $( this ).data( 'player-id' ) );
+                    } );
+                    okCallback.call( this, selectedPlayers );
                 } );
                 $playersListContainer.find( '.btn-cancel' ).click( cancelCallback );
                 $playersListContainer.find( '.player-row' ).click( function () {
@@ -79,50 +79,9 @@ if ( !window.PlayersController ) {
                         $( 'body' ).toggleClass( 'no-scroll' );
                     }
 
-                } )
+                } );
                 $container.append( $playersListContainer );
             }, function ( error ) {} );
         }
     };
 }
-
-function playerSelector( $container, type, successCallback, cancelCallback ) {
-    var playersListData;
-    if ( updateNeeded ) {}
-    /*$('.players-list-container .row').click(function () {
-        var $this = $(this);
-        $container = $this.closest('.players-list-container');
-        var maxSelect = parseInt($container.data('upto'));
-        $this.toggleClass('bg-primary selected');
-        var selectedCount = $container.find('.selected').length;
-        if (selectedCount> maxSelect) {
-            $this.toggleClass('bg-primary selected');
-            if (!$this.hasClass('popover-active')) {
-                $this.addClass('popover-active');
-                var playerSuffix = maxSelect> 1 ? 's' : '';
-                $this.popover({
-                    container: 'body',
-                    content: 'Can\'t select more than ' + maxSelect + ' player' + playerSuffix,
-                    placement: $this.is(':first-child') ? 'bottom' : 'top'
-                });
-                $this.popover('show');
-                setTimeout(function () {
-                    $this.popover('destroy');
-                    $this.removeClass('popover-active');
-                }, 1000);
-            }
-        } else if (selectedCount == maxSelect) {
-            $('.overlay-container').toggle();
-            $('.players-list-container').toggleClass('blur');
-            $('body').toggleClass('no-scroll');
-        }
-    });
-    $('#ok').click(function () {
-        parent.$('body').trigger('player-list-selected');
-    });
-    $('#cancel').click(function () {
-        parent.$('body').trigger('player-list-cancelled');
-    })*/
-}
-
-playerSelector( 1, 2, 3, 4 );
