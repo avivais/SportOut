@@ -45,9 +45,10 @@ ul.flip {
         height  : 100%;
 
         a {
-            display    : block;
-            height     : 100%;
-            perspective: 200px;
+            display            : block;
+            height             : 100%;
+            -webkit-perspective: 200px;
+            perspective        : 200px;
 
             div {
                 z-index : 1;
@@ -72,8 +73,9 @@ ul.flip {
             }
 
             div.up {
-                transform-origin: 50% 100%;
-                top             : 0;
+                -webkit-transform-origin: 50% 100%;
+                transform-origin        : 50% 100%;
+                top                     : 0;
 
                 div.inn {
                     top: 0;
@@ -92,8 +94,9 @@ ul.flip {
             }
 
             div.down {
-                transform-origin: 50% 0;
-                bottom          : 0;
+                -webkit-transform-origin: 50% 0;
+                transform-origin        : 50% 0;
+                bottom                  : 0;
 
                 div.inn {
                     bottom: 0;
@@ -147,18 +150,26 @@ ul.flip.flip-md {
     border-radius: 0;
 }
 
-.players-list {
-    .row {
-        padding      : 10px 5px;
-        border-bottom: 1px solid $primary-bg-color;
-        cursor       : pointer;
-    }
+.players-list-container {
+    padding-left : 0;
+    padding-right: 0;
 
-    .row:first-child {
-        border-top: 1px solid $primary-bg-color;
-    }
+    .players-list {
+        padding-left : 0;
+        padding-right: 0;
 
-    .row:hover {}
+        .row {
+            padding      : 10px 5px;
+            border-bottom: 1px solid $primary-bg-color;
+            cursor       : pointer;
+        }
+
+        .row:first-child {
+            border-top: 1px solid $primary-bg-color;
+        }
+
+        .row:hover {}
+    }
 }
 
 #finalScore {
@@ -232,6 +243,11 @@ ul.flip.flip-md {
     -webkit-filter: blur(5px);
 }
 
+.blur-transition {
+    -webkit-transition: .5s -webkit-filter linear;
+    transition        : .5s -webkit-filter linear;
+}
+
 .no-scroll {
     overflow: hidden;
 }
@@ -243,20 +259,22 @@ ul.flip.flip-md {
     position        : fixed;
     top             : 0;
     left            : 0;
-    background-color: rgba(0,0,0,.7);
+    background-color: rgba(0,0,0,.5);
 
     .selected-container {
         height        : 100%;
-        padding-bottom: 65px;
+        padding-bottom: 75px;
 
         .selected-players {
+            padding-top: 10px;
             font-family: 'Lato';
             font-weight: 300;
+            font-size  : large;
             height     : 100%;
             overflow-y : scroll;
 
             .row {
-                padding-top: 10px;
+                padding-top: 15px;
             }
         }
     }
@@ -266,7 +284,7 @@ ul.flip.flip-md {
         width      : 100%;
         bottom     : 0;
         left       : 0;
-        height     : 60px;
+        height     : 70px;
         font-size  : 40px;
         font-weight: bold;
 
@@ -278,9 +296,4 @@ ul.flip.flip-md {
 
 .btn-lg {
     padding: 12px;
-}
-
-.container-fluid {
-    padding-left : 0;
-    padding-right: 0;
 }
