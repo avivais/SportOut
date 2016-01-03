@@ -13,7 +13,7 @@ if ( !window.PlayersController ) {
         },
         addOverlay: function( show, addElements ) {
             $overlayContainer = $( 'body' ).append(
-                $( '<div class="overlay-container">' )
+                $( '<div class="overlay-container single-action">' )
                 .append(
                     $( '<div class="container-fluid selected-container">' )
                     .append(
@@ -25,23 +25,23 @@ if ( !window.PlayersController ) {
                         .append(
                             $( '<div class="col-xs-6 text-center">' )
                             .append(
-                                $( '<button class="btn btn-lg btn-success btn-ok">' )
+                                $( '<button class="btn btn-lg btn-success ok">' )
                                 .text( 'Ok' )
                             ),
                             $( '<div class="col-xs-6 text-center">' )
                             .append(
-                                $( '<button class="btn btn-lg btn-danger btn-cancel">' )
+                                $( '<button class="btn btn-lg btn-danger cancel">' )
                                 .text( 'Cancel' )
                             )
                         )
                     )
                 )
             );
-            $overlayContainer.find( '.btn-ok' ).click( function () {
+            $overlayContainer.find( '.btn.ok' ).click( function () {
                 window.PlayersController.toggleOverlay( true );
                 window.PlayersController.okCallback.call( this, window.PlayersController.selected.ids );
             } );
-            $overlayContainer.find( '.btn-cancel' ).click( function () {
+            $overlayContainer.find( '.btn.cancel' ).click( function () {
                 window.PlayersController.toggleOverlay( true );
                 window.PlayersController.cancelCallback.call( this );
             } );
@@ -55,7 +55,7 @@ if ( !window.PlayersController ) {
         },
         toggleOverlay: function( remove ) {
             $( '.overlay-container' ).toggle();
-            $( '.main-container' ).toggleClass( 'blur blur-transition' );
+            $( '.main-container' ).toggleClass( 'blur' );
             $( 'body' ).toggleClass( 'no-scroll' );
             if ( remove ) {
                 $( '.overlay-container' ).remove();

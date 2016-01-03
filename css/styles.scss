@@ -9,6 +9,8 @@ $flip-sm-factor: .3;
 body {
     padding-top: 70px;
     color      : white;
+    font-family: 'Lato';
+    font-weight: 100;
 }
 
 input {
@@ -206,24 +208,21 @@ ul.flip.flip-md {
 
     .player-row:hover {
         background-color: #666;
+        cursor          : pointer;
     }
 
     .headers {
         background-color: $primary-bg-color;
 
         div {
-            padding: 5px;
+            padding    : 5px;
+            font-weight: 300;
         }
     }
 
     .col-xs-2 {
         padding-left : 5px;
         padding-right: 5px;
-    }
-
-    #leftTeam,
-    #rightTeam {
-        margin-bottom: 25px;
     }
 }
 
@@ -239,13 +238,13 @@ ul.flip.flip-md {
     border-top-color: $alert-color;
 }
 
-.blur {
-    -webkit-filter: blur(5px);
+.main-container {
+    -webkit-transition: .3s -webkit-filter linear;
+    transition        : .3s -webkit-filter linear;
 }
 
-.blur-transition {
-    -webkit-transition: .5s -webkit-filter linear;
-    transition        : .5s -webkit-filter linear;
+.blur {
+    -webkit-filter: blur(2px);
 }
 
 .no-scroll {
@@ -260,38 +259,58 @@ ul.flip.flip-md {
     top             : 0;
     left            : 0;
     background-color: rgba(0,0,0,.5);
+    font-weight     : 300;
 
-    .selected-container {
-        height        : 100%;
-        padding-bottom: 75px;
+    &.single-action {
+        .selected-container {
+            height        : 100%;
+            padding-bottom: 75px;
+        }
+    }
 
-        .selected-players {
-            padding-top: 10px;
-            font-family: 'Lato';
-            font-weight: 300;
-            font-size  : large;
-            height     : 100%;
-            overflow-y : scroll;
+    &.multiple-actions {
+        .overlay-controls-container {
+            .buttons-header {
+                font-size     : xx-large;
+                font-weight   : 400;
+                padding-bottom: 10px;
+                padding-top   : 10px;
 
-            .row {
-                padding-top: 15px;
+                &:first-of-type {
+                    padding-top: 0;
+                }
+            }
+
+            .buttons-container {
+                > div {
+                    padding: 0;
+                }
+
+                button {
+                    width      : 100%;
+                    line-height: 2.2;
+                    font-size  : x-large;
+                    font-weight: 300;
+                }
             }
         }
     }
 
-    .overlay-controls-container {
-        position   : absolute;
-        width      : 100%;
-        bottom     : 0;
-        left       : 0;
-        height     : 70px;
-        font-size  : 40px;
-        font-weight: bold;
+    .selected-players {
+        padding-top: 10px;
+        font-size  : large;
+        font-weight: 100;
+        height     : 100%;
+        overflow-y : scroll;
 
-        button {
-            width: 90%;
+        .row {
+            padding-top: 15px;
         }
     }
+}
+
+.btn {
+    border-radius: 0 !important;
 }
 
 .btn-lg {
