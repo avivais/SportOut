@@ -3,7 +3,9 @@
 
     use \SportOut\SportOut;
     $sportOut = new SportOut();
-    $isLiveMatch = $sportOut->isLiveMatch();
+    $lastMatch = $sportOut->getLastMatch();
+    $lastMatchClass = $lastMatch['isLive'] ? "live" : "past";
+    $matchStart = date('U', strtotime($lastMatch['startTime']));
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -55,14 +57,14 @@
             </div>
         </nav>
         <div class="main-content">
-            <div class="container-fluid live-match-container">
+            <div class="container-fluid live-match-container <?=$lastMatchClass?>">
                 <div id="gameInfo">
                     <div id="startTime">
                         <div class="lead text-center">
                             <span class="label label-default"><small>7/2 21:30</small></span>
                         </div>
-                        <div class="lead text-center">
-                            <span class="label label-success"><small>7m</small></span>
+                        <div class="lead text-center blink">
+                            <span class="label label-success" data-start-time="<?=$startTime?>"><small>7m</small></span>
                         </div>
                     </div>
                     <div id="finalScore" class="row">
@@ -178,7 +180,8 @@
                     <div id="rightTeam" class="col-md-6">
                         <div class="row team-name right-color">The Rights</div>
                         <div class="row headers">
-                            <div class="col-md-offset-4 col-md-1 col-xs-2 total text-center">Tot</div>
+                            <div class="col-md-offset-4
+                             col-md-1 col-xs-2 total text-center">Tot</div>
                             <div class="col-md-3 col-xs-4 2pt text-center">2pt M / A %</div>
                             <div class="col-md-3 col-xs-4 3pt text-center">3pt</div>
                             <div class="col-md-1 col-xs-2 fouls text-center">Fouls</div>

@@ -76,7 +76,7 @@ if ( !window.MatchesController ) {
                 $( '.overlay-container' ).remove();
             }
         },
-        playerSelected: function () {
+        playerSelected: function () {debugger;
             var playerId = $( this ).data( 'playerId' );
             var playerName = $( this ).data( 'playerName' );
             $overlayContainer = window.MatchesController.addOverlay();

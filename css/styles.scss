@@ -10,7 +10,7 @@ body {
     padding-top: 70px;
     color      : white;
     font-family: 'Lato';
-    font-weight: 100;
+    font-weight: 300;
 }
 
 input {
@@ -315,4 +315,24 @@ ul.flip.flip-md {
 
 .btn-lg {
     padding: 12px;
+}
+
+@-webkit-keyframes blinker {
+    from {
+        opacity: 1.0;
+    }
+
+    to {
+        opacity: .0;
+    }
+}
+
+.blink {
+    -webkit-animation-name           : blinker;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+    -webkit-animation-duration       : .8s;
+    -webkit-animation-delay          : 0;
+    -webkit-animation-direction      : alternate;
+    -webkit-animation-fill-mode      : both;
 }

@@ -18,12 +18,19 @@ class SportOut
 
     public function isLiveMatch()
     {
-        $query = $this->db->query('SELECT `id` FROM `matches` WHERE endTime IS NOT NULL')->fetch_row();
-        if ($query && $query[0]) {
-            return $query[0];
+        $row = $this->db->query("SELECT `id` FROM `matches` WHERE endTime IS NOT NULL")->fetch_row();
+        if ($row && $row[0]) {
+            return $row[0];
         }
 
         return false;
+    }
+
+    public function getLastMatch()
+    {
+        $matchRow = $this->db->query("SELECT * FROM `matches` ORDER BY `id` DESC LIMIT 1")->fetch_assoc();
+        $matchRow['isLive'] = !$matchRow['endTime'];
+        return $matchRow;
     }
 
     public function updatePlayerData($playerId, $updateType)
