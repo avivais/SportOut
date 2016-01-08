@@ -10,7 +10,7 @@ class SportOut
 
     public function __construct()
     {
-        $this->db = new mysqli('localhost', 'root', 'root', 'sportout');
+        $this->db = new mysqli('sportsout.db.10456363.hostedresource.com', 'sportsout', 'G0d@ddy1', 'sportsout');
         if (mysqli_connect_errno()) {
             die('Connection to DB failed: '.mysqli_connect_error());
         }
