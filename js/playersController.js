@@ -9,7 +9,7 @@ if ( !window.PlayersController ) {
                 }
             } ).then( successCallback, errorCallback );
         },
-        addOverlay: function( $selectedPlayers, selectedData, okCallback, cancelCallback ) {
+        addOverlay: function( $selectedPlayers, selectedData, okCallback, cancelCallback, $container ) {
             $( 'body .overlay-container' ).remove();
             $( 'body' ).addClass( 'no-scroll' );
             $( '.main-container' ).addClass( 'blur' );
@@ -45,12 +45,14 @@ if ( !window.PlayersController ) {
                     okCallback.call( this, selectedData );
                 }
                 window.PlayersController.removeOverlay();
+                $container.refresh();
             } );
             $overlayContainer.find( '.btn.cancel' ).click( function () {
                 if ( cancelCallback ) {
                     cancelCallback.call( this );
                 }
                 window.PlayersController.removeOverlay();
+                $container.refresh();
             } );
             return $overlayContainer;
         },
@@ -116,10 +118,14 @@ if ( !window.PlayersController ) {
                                 )
                             );
                         } );
-                        self.addOverlay( $selectedElements, selectedData, okCallback, cancelCallback );
+                        self.addOverlay( $selectedElements, selectedData, okCallback, cancelCallback, $container );
                     }
                 } );
                 $container.append( $playersListContainer );
+                $container.refresh = function() {
+                    $container.find( '.players-list-container' ).remove();
+                    window.PlayersController.addToContainer( $container, type, okCallback, cancelCallback );
+                }
             }, function ( error ) {} );
         }
     };

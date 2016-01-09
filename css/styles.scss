@@ -92,7 +92,7 @@ ul.flip {
                 z-index         : 5;
                 width           : 100%;
                 height          : 3px;
-                background-color: rgba(0,0,0,.4);
+                background-color: rgba(0,0,0,.75);
             }
 
             div.down {
@@ -216,7 +216,6 @@ ul.flip.flip-md {
 
         div {
             padding    : 5px;
-            font-weight: 300;
         }
     }
 
@@ -258,7 +257,6 @@ ul.flip.flip-md {
     top             : 0;
     left            : 0;
     background-color: rgba(0,0,0,.5);
-    font-weight     : 300;
 
     &.single-action {
         .selected-container {
@@ -283,7 +281,6 @@ ul.flip.flip-md {
                     width      : 100%;
                     line-height: 2.2;
                     font-size  : x-large;
-                    font-weight: 300;
                 }
             }
         }
@@ -311,7 +308,6 @@ ul.flip.flip-md {
                     width      : 100%;
                     line-height: 2.2;
                     font-size  : x-large;
-                    font-weight: 300;
                 }
             }
         }
@@ -320,7 +316,7 @@ ul.flip.flip-md {
     .selected-players {
         padding-top: 10px;
         font-size  : large;
-        font-weight: 100;
+        font-weight: 300;
         height     : 100%;
         overflow-y : scroll;
 
