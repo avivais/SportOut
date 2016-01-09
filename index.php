@@ -144,7 +144,7 @@
                         <div class="row player-row" data-player-name="Avi Vaisenberger" data-player-id="2">
                             <div class="col-md-4 player-name"><strong>Avi Vaisenberger</strong></div>
                             <div class="col-md-1 col-xs-2 total text-center">9</div>
-                            <div class="col-md-3 col-xs-4 2pt text-center"><span class="made">0</span> / <span class="attempted">0</span> <small><span class="percentage"></span></div>
+                            <div class="col-md-3 col-xs-4 2pt text-center"><span class="made">0</span> / <span class="attempted">0</span> <small><span class="percentage"></small></span></div>
                             <div class="col-md-3 col-xs-4 3pt text-center"><span class="made">3</span> / <span class="attempted">5</span> <small><span class="percentage">60%</span></small></div>
                             <div class="col-md-1 col-xs-2 fouls text-center">3</div>
                         </div>
@@ -224,6 +224,7 @@
                     </div>
                 </div>
             </div>
+            <div id="testContainer"></div>
         </div>
     </div>
     <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>

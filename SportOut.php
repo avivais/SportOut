@@ -10,7 +10,15 @@ class SportOut
 
     public function __construct()
     {
-        $this->db = new mysqli('sportsout.db.10456363.hostedresource.com', 'sportsout', 'G0d@ddy1', 'sportsout');
+        $username = 'root';
+        $password = 'avivr121';
+        $hostname = 'test.sportout.tk';
+        $dbName = 'sportout';
+        // $username = 'sportsout';
+        // $password = 'G0D@ddy1';
+        // $hostname = 'sportsout.db.10456363.hostedresource.com';
+        // $dbName = 'sportsout';
+        $this->db = new mysqli('test.sportout.tk', 'root', 'avivr121', 'sportout');
         if (mysqli_connect_errno()) {
             die('Connection to DB failed: '.mysqli_connect_error());
         }

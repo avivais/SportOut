@@ -1,8 +1,6 @@
 if ( !window.PlayersController ) {
     window.PlayersController = {
         selected: {},
-        okCallback: null,
-        cancelCallback: null,
         getData: function ( type, successCallback, errorCallback ) {
             $.ajax( {
                 url: 'getPlayers.php',
@@ -11,14 +9,19 @@ if ( !window.PlayersController ) {
                 }
             } ).then( successCallback, errorCallback );
         },
-        addOverlay: function( show, addElements ) {
+        addOverlay: function( $selectedPlayers, selectedData, okCallback, cancelCallback ) {
+            $( 'body .overlay-container' ).remove();
+            $( 'body' ).addClass( 'no-scroll' );
+            $( '.main-container' ).addClass( 'blur' );
+            $selectedPlayersContainer = $( '<div class="selected-players">' );
+            if ( $selectedPlayers ) {
+                $selectedPlayersContainer.append( $selectedPlayers );
+            }
             $overlayContainer = $( 'body' ).append(
                 $( '<div class="overlay-container single-action">' )
                 .append(
                     $( '<div class="container-fluid selected-container">' )
-                    .append(
-                        $( '<div class="selected-players">' )
-                    ),
+                    .append( $selectedPlayersContainer ),
                     $( '<div class="container-fluid overlay-controls-container">' )
                     .append(
                         $( '<div class="row buttons-container">' )
@@ -37,38 +40,31 @@ if ( !window.PlayersController ) {
                     )
                 )
             );
-            $overlayContainer.find( '.btn.ok' ).click( function () {
-                window.PlayersController.toggleOverlay( true );
-                window.PlayersController.okCallback.call( this, window.PlayersController.selected.ids );
+            $overlayContainer.find( '.btn.ok' ).bind( 'click', function() {
+                if ( okCallback ) {
+                    okCallback.call( this, selectedData );
+                }
+                window.PlayersController.removeOverlay();
             } );
             $overlayContainer.find( '.btn.cancel' ).click( function () {
-                window.PlayersController.toggleOverlay( true );
-                window.PlayersController.cancelCallback.call( this );
-            } );
-            if ( show ) {
-                if ( addElements ) {
-                    $overlayContainer.find( '.selected-players' ).append( addElements );
+                if ( cancelCallback ) {
+                    cancelCallback.call( this );
                 }
-                window.PlayersController.toggleOverlay();
-            }
+                window.PlayersController.removeOverlay();
+            } );
             return $overlayContainer;
         },
-        toggleOverlay: function( remove ) {
-            $( '.overlay-container' ).toggle();
-            $( '.main-container' ).toggleClass( 'blur' );
-            $( 'body' ).toggleClass( 'no-scroll' );
-            if ( remove ) {
-                $( '.overlay-container' ).remove();
-            }
+        removeOverlay: function( remove ) {
+            $( '.overlay-container' ).hide();
+            $( '.main-container' ).removeClass( 'blur' );
+            $( 'body' ).removeClass( 'no-scroll' );
+            $( '.overlay-container' ).remove();
         },
         addToContainer: function ( $container, type, okCallback, cancelCallback ) {
             var self = this;
-            this.okCallback = okCallback;
-            this.cancelCallback = cancelCallback;
             $playersListContainer = $( '<div class="container-fluid players-list-container">' ).append(
                 $( '<div class="container-fluid players-list">' )
             );
-            $overlayContainer = this.addOverlay();
             this.getData( type, function ( playersData ) {
                 playersData.Players.forEach( function ( playerDetails ) {
                     $playersListContainer.find( '.players-list' ).append(
@@ -103,7 +99,7 @@ if ( !window.PlayersController ) {
                             }, 800 );
                         }
                     } else if ( selectedCount == maxSelect ) {
-                        self.selected = {
+                        var selectedData = {
                             'names': $( '.selected .player-data' ).map( function () {
                                 return $( this ).text();
                             } ),
@@ -111,16 +107,16 @@ if ( !window.PlayersController ) {
                                 return $( this ).data( 'player-id' );
                             } )
                         };
-                        var selectedElements = [];
-                        self.selected.names.each( function() {
-                            selectedElements.push(
+                        var $selectedElements = [];
+                        selectedData.names.each( function() {
+                            $selectedElements.push(
                                 $( '<div class="row">')
                                 .append(
                                     $( '<div class="col-xs-12 text-center">' ).text( this )
                                 )
                             );
                         } );
-                        self.addOverlay( true, selectedElements );
+                        self.addOverlay( $selectedElements, selectedData, okCallback, cancelCallback );
                     }
                 } );
                 $container.append( $playersListContainer );

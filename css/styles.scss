@@ -252,7 +252,6 @@ ul.flip.flip-md {
 }
 
 .overlay-container {
-    display         : none;
     height          : 100%;
     width           : 100%;
     position        : fixed;
@@ -265,6 +264,28 @@ ul.flip.flip-md {
         .selected-container {
             height        : 100%;
             padding-bottom: 75px;
+        }
+
+        .overlay-controls-container {
+            font-size     : x-large;
+            font-weight   : 400;
+            padding-top   : 10px;
+            position      : absolute;
+            bottom        : 0px;
+            width         : 100%;
+
+            .buttons-container {
+                > div {
+                    padding: 0;
+                }
+
+                button {
+                    width      : 100%;
+                    line-height: 2.2;
+                    font-size  : x-large;
+                    font-weight: 300;
+                }
+            }
         }
     }
 
