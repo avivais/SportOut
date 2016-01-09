@@ -125,7 +125,7 @@ if ( !window.PlayersController ) {
                 $container.refresh = function() {
                     $container.find( '.players-list-container' ).remove();
                     window.PlayersController.addToContainer( $container, type, okCallback, cancelCallback );
-                }
+                };
             }, function ( error ) {} );
         }
     };
