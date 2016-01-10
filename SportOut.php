@@ -66,4 +66,64 @@ class SportOut
             error_log($sql);
         }
     }
+
+    public function getPlayers($type = 'all') {
+        $baseSQL = 'SELECT `id` AS `Id`,`name` AS `Name` FROM `players`';
+        $maxSelect = 15;
+        switch ($type) {
+            case 'all':
+                $sql = $baseSQL;
+                break;
+            case 'newarrivals':
+                $sql = $baseSQL;
+                $maxSelect = $this->getMaxArrivals();
+                break;
+            case 'newmatch':
+                $sql = $baseSQL . "
+                    WHERE
+                        `id` IN (
+                            SELECT `playerId`
+                            FROM `arrivals`
+                            WHERE
+                                `date` >= DATE_FORMAT(NOW() - INTERVAL 1 DAY, '%Y-%m-%d')
+                        )
+                ";
+                //$lastMatchWinners = $this->getLastMatchWinners();
+                break;
+        }
+        $players = array();
+        $playersResult = $this->db->query($sql);
+        while ($row = $playersResult->fetch_assoc()) {
+            $players[] = $row;
+        }
+        return array("Players" => $players, "MaxSelect" => $maxSelect);
+    }
+
+    private function getMaxArrivals() {
+        $sql = "
+            SELECT (15-COUNT(*))
+            FROM `arrivals`
+            WHERE
+                `date` >= DATE_FORMAT(NOW() - INTERVAL 1 DAY, '%Y-%m-%d')
+        ";
+        $row = $this->db->query($sql)->fetch_row();
+        return ($row && isset($row[0])) ? $row[0] : 15;
+    }
+
+    public function updateArrivals($playersData) {
+        foreach ($playersData as $data) {
+            $sql = "
+                INSERT INTO `arrivals` VALUES(
+                    {$data["PlayerId"]},
+                    DATE_FORMAT(NOW(), '%Y-%m=%d'),
+                    {$data["Payment"]}
+                )
+            ";
+            $this->db->query($sql);
+        }
+    }
+    /*private function getLastMatchWinners() {
+        $sql = "
+            SELECT "
+    }*/
 }

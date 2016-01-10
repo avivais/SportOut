@@ -3,13 +3,14 @@ if ( !window.PlayersController ) {
         selected: {},
         getData: function ( type, successCallback, errorCallback ) {
             $.ajax( {
-                url: 'getPlayers.php',
+                url: 'action.php',
                 data: {
+                    action: 'getPlayers',
                     type: type
                 }
             } ).then( successCallback, errorCallback );
         },
-        addOverlay: function( $selectedPlayers, selectedData, okCallback, cancelCallback, $container ) {
+        addOverlay: function( $selectedPlayers, selectedData, okCallback, cancelCallback, $container, refresh ) {
             $( 'body .overlay-container' ).remove();
             $( 'body' ).addClass( 'no-scroll' );
             $( '.main-container' ).addClass( 'blur' );
@@ -45,14 +46,18 @@ if ( !window.PlayersController ) {
                     okCallback.call( this, selectedData );
                 }
                 window.PlayersController.removeOverlay();
-                $container.refresh();
+                if ( $container && refresh ) {
+                    $container.refresh();
+                }
             } );
             $overlayContainer.find( '.btn.cancel' ).click( function () {
                 if ( cancelCallback ) {
                     cancelCallback.call( this );
                 }
                 window.PlayersController.removeOverlay();
-                $container.refresh();
+                if ( $container && refresh ) {
+                    $container.refresh();
+                }
             } );
             return $overlayContainer;
         },
@@ -62,7 +67,7 @@ if ( !window.PlayersController ) {
             $( 'body' ).removeClass( 'no-scroll' );
             $( '.overlay-container' ).remove();
         },
-        addToContainer: function ( $container, type, okCallback, cancelCallback ) {
+        addToContainer: function ( $container, type, doneCallback, okCallback, cancelCallback ) {
             var self = this;
             $playersListContainer = $( '<div class="container-fluid players-list-container">' ).append(
                 $( '<div class="container-fluid players-list">' )
@@ -124,8 +129,11 @@ if ( !window.PlayersController ) {
                 $container.append( $playersListContainer );
                 $container.refresh = function() {
                     $container.find( '.players-list-container' ).remove();
-                    window.PlayersController.addToContainer( $container, type, okCallback, cancelCallback );
+                    window.PlayersController.addToContainer( $container, type, doneCallback, okCallback, cancelCallback );
                 };
+                if ( doneCallback ) {
+                    doneCallback.call( this );
+                }
             }, function ( error ) {} );
         }
     };

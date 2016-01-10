@@ -52,12 +52,20 @@
                                 <li><a href="#">Payments / Attendance</a></li>
                             </ul>
                         </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Payments <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Show</a></li>
+                                <li><a href="#update-arrivals">Update</a></li>
+                            </ul>
+                        </li>
                     </ul>
                 </div>
             </div>
         </nav>
         <div class="main-content">
-            <div class="container-fluid live-match-container <?=$lastMatchClass?>">
+            <div class="container-fluid content new-arrivals-container hidden"></div>
+            <div class="container-fluid content live-match-container <?=$lastMatchClass?>">
                 <div id="gameInfo">
                     <div id="startTime">
                         <div class="lead text-center">
@@ -224,7 +232,6 @@
                     </div>
                 </div>
             </div>
-            <div id="testContainer"></div>
         </div>
     </div>
     <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
