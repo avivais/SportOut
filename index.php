@@ -234,6 +234,22 @@
             </div>
         </div>
     </div>
+    <div class="overlay-loading-indicator hidden">
+        <div id="cssload-contain">
+            <div class="cssload-wrap" id="cssload-wrap1">
+                <div class="cssload-ball" id="cssload-ball1"></div>
+            </div>
+            <div class="cssload-wrap" id="cssload-wrap2">
+                <div class="cssload-ball" id="cssload-ball2"></div>
+            </div>
+            <div class="cssload-wrap" id="cssload-wrap3">
+                <div class="cssload-ball" id="cssload-ball3"></div>
+            </div>
+            <div class="cssload-wrap" id="cssload-wrap4">
+                <div class="cssload-ball" id="cssload-ball4"></div>
+            </div>
+        </div>
+    </div>
     <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
     <script src="js/playersController.js"></script>

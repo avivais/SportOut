@@ -152,7 +152,14 @@ ul.flip.flip-md {
     border-radius: 0;
 }
 
+.hover-button-container {
+    position: fixed;
+    bottom  : 0;
+    right   : 0;
+}
+
 .players-list-container {
+    position     : relative;
     padding-left : 0;
     padding-right: 0;
 
@@ -163,14 +170,15 @@ ul.flip.flip-md {
         .row {
             padding      : 10px 5px;
             border-bottom: 1px solid $primary-bg-color;
-            cursor       : pointer;
         }
 
         .row:first-child {
             border-top: 1px solid $primary-bg-color;
         }
 
-        .row:hover {}
+        .row:hover {
+            cursor: pointer;
+        }
     }
 }
 
@@ -215,7 +223,7 @@ ul.flip.flip-md {
         background-color: $primary-bg-color;
 
         div {
-            padding    : 5px;
+            padding: 5px;
         }
     }
 
@@ -250,6 +258,16 @@ ul.flip.flip-md {
     overflow: hidden;
 }
 
+.overlay-loading-indicator {
+    height          : 100%;
+    position        : fixed;
+    width           : 100%;
+    top             : 0;
+    left            : 0;
+    background-color: rgba(0,0,0,.6);
+    z-index         : 9999;
+}
+
 .overlay-container {
     height          : 100%;
     width           : 100%;
@@ -257,20 +275,21 @@ ul.flip.flip-md {
     top             : 0;
     left            : 0;
     background-color: rgba(0,0,0,.5);
+    overflow        : hidden;
 
     &.single-action {
         .selected-container {
-            height        : 100%;
-            padding-bottom: 75px;
+            height : 100%;
+            padding: 0 0 75px;
         }
 
         .overlay-controls-container {
-            font-size     : x-large;
-            font-weight   : 400;
-            padding-top   : 10px;
-            position      : absolute;
-            bottom        : 0px;
-            width         : 100%;
+            font-size  : x-large;
+            font-weight: 400;
+            padding-top: 10px;
+            position   : absolute;
+            bottom     : 0;
+            width      : 100%;
 
             .buttons-container {
                 > div {
@@ -282,6 +301,12 @@ ul.flip.flip-md {
                     line-height: 2.2;
                     font-size  : x-large;
                 }
+            }
+        }
+
+        .selected-players .row {
+             :hover {
+                cursor: pointer;
             }
         }
     }
@@ -318,10 +343,38 @@ ul.flip.flip-md {
         font-size  : large;
         font-weight: 300;
         height     : 100%;
-        overflow-y : scroll;
+        overflow-y : auto;
+        overflow-x : hidden;
 
         .row {
             padding-top: 15px;
+
+            .col-xs-12 {
+                > div {
+                    display: inline-block;
+
+                    & + div {
+                        margin-left: 10px;
+                    }
+                }
+            }
+
+            .payment-input-container {
+                .payment-input {
+                    background   : transparent;
+                    outline      : none;
+                    border       : none;
+                    border-bottom: 2px dotted #666;
+                    color        : yellow;
+                }
+
+                .clear-button {
+                    position   : absolute;
+                    top        : 50%;
+                    transform  : translate3d(0, -50%, 0);
+                    margin-left: 5px;
+                }
+            }
         }
     }
 }
@@ -352,4 +405,175 @@ ul.flip.flip-md {
     -webkit-animation-delay          : 0;
     -webkit-animation-direction      : alternate;
     -webkit-animation-fill-mode      : both;
+}
+
+#cssload-contain {
+    width                      : 146px;
+    height                     : 49px;
+    position                   : absolute;
+    top                        : 0;
+    right                      : 0;
+    left                       : 0;
+    bottom                     : 0;
+    margin                     : auto;
+    opacity                    : 0;
+    animation                  : fadeIn 1.15s 1;
+    -o-animation               : fadeIn 1.15s 1;
+    -ms-animation              : fadeIn 1.15s 1;
+    -webkit-animation          : fadeIn 1.15s 1;
+    -moz-animation             : fadeIn 1.15s 1;
+    animation-fill-mode        : forwards;
+    -o-animation-fill-mode     : forwards;
+    -ms-animation-fill-mode    : forwards;
+    -webkit-animation-fill-mode: forwards;
+    -moz-animation-fill-mode   : forwards;
+}
+
+.cssload-wrap {
+    animation        : translate 1150ms infinite ease-in-out alternate, zindex 2300ms infinite ease-in-out;
+    -o-animation     : translate 1150ms infinite ease-in-out alternate, zindex 2300ms infinite ease-in-out;
+    -ms-animation    : translate 1150ms infinite ease-in-out alternate, zindex 2300ms infinite ease-in-out;
+    -webkit-animation: translate 1150ms infinite ease-in-out alternate, zindex 2300ms infinite ease-in-out;
+    -moz-animation   : translate 1150ms infinite ease-in-out alternate, zindex 2300ms infinite ease-in-out;
+    position         : absolute;
+}
+
+.cssload-ball {
+    width                  : 49px;
+    height                 : 49px;
+    box-shadow             : 0 -6.25px 0 rgba(0,0,0,0.15) inset;
+    background-color       : rgb(255,132,0);
+    border-radius          : 50%;
+    animation              : scale 1150ms infinite ease-in-out alternate;
+    -o-animation           : scale 1150ms infinite ease-in-out alternate;
+    -ms-animation          : scale 1150ms infinite ease-in-out alternate;
+    -webkit-animation      : scale 1150ms infinite ease-in-out alternate;
+    -moz-animation         : scale 1150ms infinite ease-in-out alternate;
+    animation-delay        : -575ms;
+    -o-animation-delay     : -575ms;
+    -ms-animation-delay    : -575ms;
+    -webkit-animation-delay: -575ms;
+    -moz-animation-delay   : -575ms;
+    transform              : scale(0.5);
+    -o-transform           : scale(0.5);
+    -ms-transform          : scale(0.5);
+    -webkit-transform      : scale(0.5);
+    -moz-transform         : scale(0.5);
+    border                 : 2px solid black;
+}
+
+.cssload-ball:after {
+    content      : '';
+    width        : 49px;
+    height       : 13px;
+    background   : rgba(255,255,255,.2);
+    position     : absolute;
+    top          : 55px;
+    border-radius: 50%;
+}
+
+#cssload-wrap2 {
+    animation-delay        : -1150ms;
+    -o-animation-delay     : -1150ms;
+    -ms-animation-delay    : -1150ms;
+    -webkit-animation-delay: -1150ms;
+    -moz-animation-delay   : -1150ms;
+}
+
+#cssload-ball2 {
+    background-color       : rgb(255,132,0);
+    animation-delay        : -1725ms;
+    -o-animation-delay     : -1725ms;
+    -ms-animation-delay    : -1725ms;
+    -webkit-animation-delay: -1725ms;
+    -moz-animation-delay   : -1725ms;
+}
+
+#cssload-wrap3 {
+    animation-delay        : -1725ms;
+    -o-animation-delay     : -1725ms;
+    -ms-animation-delay    : -1725ms;
+    -webkit-animation-delay: -1725ms;
+    -moz-animation-delay   : -1725ms;
+}
+
+#cssload-ball3 {
+    background-color       : rgb(255,0,0);
+    -webkit-animation-delay: -2300ms;
+    animation-delay        : -2300ms;
+}
+
+#cssload-wrap4 {
+    animation-delay        : -2875ms;
+    -o-animation-delay     : -2875ms;
+    -ms-animation-delay    : -2875ms;
+    -webkit-animation-delay: -2875ms;
+    -moz-animation-delay   : -2875ms;
+}
+
+#cssload-ball4 {
+    background-color       : rgb(255,0,0);
+    animation-delay        : -3450ms;
+    -o-animation-delay     : -3450ms;
+    -ms-animation-delay    : -3450ms;
+    -webkit-animation-delay: -3450ms;
+    -moz-animation-delay   : -3450ms;
+}
+
+@keyframes translate {
+    100% {
+        -webkit-transform: translateX(97px);
+        transform        : translateX(97px);
+    }
+}
+
+@-webkit-keyframes translate {
+    100% {
+        -webkit-transform: translateX(97px);
+    }
+}
+
+@keyframes scale {
+    100% {
+        -webkit-transform: scale(1);
+        transform        : scale(1);
+    }
+}
+
+@-webkit-keyframes scale {
+    100% {
+        -webkit-transform: scale(1);
+    }
+}
+
+@keyframes zindex {
+    25% {
+        z-index: 1;
+    }
+
+    75% {
+        z-index: -1;
+    }
+}
+
+@-webkit-keyframes zindex {
+    25% {
+        z-index: 1;
+    }
+
+    75% {
+        z-index: -1;
+    }
+}
+
+@keyframes fadeIn {
+    100% {
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes fadeIn {
+    100% {
+        opacity: 1;
+    }
 }

@@ -1,5 +1,13 @@
+SportOut = ( typeof SportOut !== 'undefined' ) ? SportOut : {
+	toggleOverlay: function() {
+		$( '.overlay-loading-indicator' ).toggleClass( 'hidden' );
+		$( 'body' ).toggleClass( 'no-scroll' );
+		$( '.main-container' ).toggleClass( 'blur' );
+	}
+};
 $( document ).ready( function () {
 	$( '.nav ul li a' ).click( function() {
+		$( 'button.navbar-toggle' ).trigger( 'click' );
 		$( '.content' ).hide();
 		$( '#topNavBar .active' ).removeClass( 'active' );
 		$closestLi = $( this ).closest( 'li' );
@@ -14,10 +22,11 @@ $( document ).ready( function () {
 		}
 	} );
 	function showArrivals() {
+		SportOut.toggleOverlay();
 		window.PlayersController.addToContainer( $( '.new-arrivals-container' ), 'newarrivals',
 			function() {
 				$( '.new-arrivals-container' ).removeClass( 'hidden' ).show();
-				debugger;
+				SportOut.toggleOverlay();
 			},
 			function(){
 				debugger;
