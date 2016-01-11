@@ -6,11 +6,26 @@ $flip-lg-factor: 1;
 $flip-md-factor: .6;
 $flip-sm-factor: .3;
 
+html {
+    height    : 100%;
+    overflow-x: hidden;
+}
+
 body {
+    height     : 100%;
     padding-top: 50px;
     color      : white;
     font-family: 'Lato';
     font-weight: 300;
+    overflow-x : hidden;
+
+    &.no-scroll {
+        position: fixed;
+        top     : 0;
+        left    : 0;
+        overflow: hidden;
+        width   : 100%;
+    }
 }
 
 input {
@@ -252,10 +267,6 @@ ul.flip.flip-md {
 
 .blur {
     -webkit-filter: blur(2px);
-}
-
-.no-scroll {
-    overflow: hidden;
 }
 
 .overlay-loading-indicator {
