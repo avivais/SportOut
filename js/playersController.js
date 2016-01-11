@@ -136,9 +136,9 @@ if ( !window.PlayersController ) {
                 } );
                 $playersListContainer.find( '.player-row' ).click( function () {
                     var $this = $( this );
+                    $this.toggleClass( 'bg-primary selected' );
                     $playersListContainer = $this.closest( '.players-list-container' );
                     var maxSelect = playersData.MaxSelect;
-                    $this.toggleClass( 'bg-primary selected' );
                     var selectedCount = $playersListContainer.find( '.selected' ).length;
                     if ( selectedCount > maxSelect ) {
                         $this.toggleClass( 'bg-primary selected' );
