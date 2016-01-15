@@ -6,6 +6,7 @@
     $lastMatch = $sportOut->getLastMatch();
     $lastMatchClass = $lastMatch['isLive'] ? "live" : "past";
     $matchStart = date('U', strtotime($lastMatch['startTime']));
+// Test
 ?>
 <!DOCTYPE html>
 <html lang="en">
