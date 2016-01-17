@@ -21,6 +21,24 @@ $( document ).ready( function () {
 				break;
 		}
 	} );
+
+	function updateArrivals( $selectedPlayers ) {
+		var playersArr = [];
+		$selectedPlayers.forEach( function( $playerData ) {
+			playersArr.push( {
+				'playerId': $playerData.data( 'player-id' ),
+				'playerPayment': $playerData.find( 'input' ).val()
+			} );
+		} );
+		$.ajax( {
+			url: 'action.php',
+			data: {
+				action: 'updateArrivals',
+				playersArr: playersArr
+			}
+		} );
+	}
+
 	function showArrivals() {
 		SportOut.toggleOverlay();
 		window.PlayersController.addToContainer( $( '.new-arrivals-container' ), 'newarrivals',
@@ -28,8 +46,8 @@ $( document ).ready( function () {
 				$( '.new-arrivals-container' ).removeClass( 'hidden' ).show();
 				SportOut.toggleOverlay();
 			},
-			function(){
-				debugger;
+			function( $selectedPlayers ) {
+				updateArrivals( $selectedPlayers );
 			}
 		);
 	}

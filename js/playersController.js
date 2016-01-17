@@ -109,7 +109,8 @@ if ( !window.PlayersController ) {
             $( '.selected .player-data' ).each( function () {
                 var payment = $( this ).data( 'payment' ) ? $( this ).data( 'payment' ) + " &#8362;" : "";
                 $selectedElements.push(
-                    $( '<div class="row selected-player">' ).append(
+                    $( '<div class="row selected-player">' )
+                    .append(
                         $( '<div class="col-xs-12 text-center">' ).append(
                             $( '<div class="player-name">' ).text( $( this ).text() ),
                             $( '<div class="payment">' ).html( payment ),
@@ -119,6 +120,7 @@ if ( !window.PlayersController ) {
                             )
                         )
                     )
+                    .data( 'player-id', $( this ).data( 'player-id' ) )
                 );
             } );
             this.addOverlay( $selectedElements, okCallback, cancelCallback, $container );
