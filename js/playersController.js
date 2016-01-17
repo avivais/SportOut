@@ -17,39 +17,53 @@ if ( !window.PlayersController ) {
             $selectedPlayersContainer = $( '<div class="selected-players">' );
             if ( $selectedPlayers ) {
                 $selectedPlayersContainer.append( $selectedPlayers );
-                $selectedPlayersContainer.find( '.selected-player' ).click( function ( event ) {
-                    var $paymentInputContainer = $( this ).find( '.payment-input-container' );
-                    var $paymentInput = $paymentInputContainer.find( 'input' );
+                $selectedPlayersContainer.click( function ( event ) {
                     var $target = $( event.target );
-                    if ( $target.hasClass( 'clear-button' ) ) {
-                        // Clicked on clear button - Clear input
-                        $paymentInput.val( '' );
-                        return;
-                    }
                     if ( $target.hasClass( 'payment-input' ) ) {
                         // Clicked on input - Do nothing
                         return;
                     }
-                    var wasHidden = $paymentInputContainer.hasClass( 'hidden' );
                     $( '.selected-player .payment-input-container:not(.hidden)' ).each( function () {
                         $( this ).addClass( 'hidden' );
                         var updatedPayment = $( this ).find( '.payment-input' ).val() ? $( this ).find( '.payment-input' ).val() + " &#8362;" : "";
                         $( this ).siblings( '.payment' ).html( updatedPayment ).show();
                     } );
-                    if ( wasHidden ) {
-                        $paymentInputContainer.removeClass( 'hidden' );
-                        var $paymentContainer = $( this ).find( '.payment' );
-                        $paymentContainer.hide();
-                        var payment = parseFloat( $paymentContainer.text() );
-                        if ( payment ) {
-                            $paymentInput.val( payment );
+                    var isRow = !!$target.closest( '.row.selected-player' ).length;
+                    if ( isRow ) {
+                        $row = $target.closest( '.row.selected-player' );
+                        var $paymentInputContainer = $row.find( '.payment-input-container' );
+                        var $paymentInput = $paymentInputContainer.find( 'input' );
+                        $paymentInput.off( 'blur' ).on( 'blur', function() {
+                            $paymentInputContainer = $( this ).closest( '.payment-input-container' );
+                            $paymentInputContainer.addClass( 'hidden' );
+                            var updatedPayment = $( this ).val() ? $( this ).val() + " &#8362;" : "";
+                            $paymentInputContainer.siblings( '.payment' ).html( updatedPayment ).show();
+                        } );
+                        $paymentInput.off( 'keypress' ).on( 'keypress', function( e ) {
+                            if ( e.keyCode === 13 || e.which === 13 ) {
+                                $paymentInputContainer = $( this ).closest( '.payment-input-container' );
+                                $paymentInputContainer.addClass( 'hidden' );
+                                var updatedPayment = $( this ).val() ? $( this ).val() + " &#8362;" : "";
+                                $paymentInputContainer.siblings( '.payment' ).html( updatedPayment ).show();
+                            }
+                        } );
+                        if ( $target.hasClass( 'clear-button' ) ) {
+                            // Clicked on clear button - Clear input
+                            $paymentInput.val( '' );
+                            return;
                         }
-                        $paymentInput.focus();
-                    }
-                    else {
-                        $paymentInputContainer.addClass( 'hidden' );
-                        var updatedPayment = $paymentInput.val() ? $paymentInput.val() + " &#8362;" : "";
-                        $paymentInputContainer.siblings( '.payment' ).html( updatedPayment ).show();
+
+                        var wasHidden = $paymentInputContainer.hasClass( 'hidden' );
+                        if ( wasHidden ) {
+                            $paymentInputContainer.removeClass( 'hidden' );
+                            var $paymentContainer = $row.find( '.payment' );
+                            $paymentContainer.hide();
+                            var payment = parseFloat( $paymentContainer.text() );
+                            if ( payment ) {
+                                $paymentInput.val( payment );
+                            }
+                            $paymentInput.focus();
+                        }
                     }
                 } );
             }
@@ -100,7 +114,7 @@ if ( !window.PlayersController ) {
                             $( '<div class="player-name">' ).text( $( this ).text() ),
                             $( '<div class="payment">' ).html( payment ),
                             $( '<div class="payment-input-container hidden">' ).append(
-                                $( '<input class="payment-input" type="text">' ),
+                                $( '<input class="payment-input" type="tel">' ),
                                 $( '<span class="glyphicon glyphicon-remove-circle clear-button">' )
                             )
                         )
@@ -162,7 +176,7 @@ if ( !window.PlayersController ) {
                         if ( !minSelect ) {
                             minSelect = 1;
                         }
-                        if ( selectedCount > minSelect ) {
+                        if ( selectedCount >= minSelect ) {
                             $( '.hover-button-container' ).removeClass( 'hidden' );
                         } else {
                             $( '.hover-button-container' ).addClass( 'hidden' );
