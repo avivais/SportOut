@@ -15,8 +15,7 @@ switch ($_GET['action']) {
         error_log(print_r($data,true));
         break;
     case 'updateArrivals':
-        error_log(print_r($_GET,true));
-        die();
+        error_log(print_r($_GET,true));;
         $date = getvar('date');
         $data = $sportOut->updateArrivals(getvar('arrivals',array(),true));
         error_log($date." - ".print_r($data,true));

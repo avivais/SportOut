@@ -17,7 +17,7 @@ if ( !window.PlayersController ) {
             $selectedPlayersContainer = $( '<div class="selected-players">' );
             if ( $selectedPlayers ) {
                 $selectedPlayersContainer.append( $selectedPlayers );
-                $selectedPlayersContainer.click( function ( event ) {
+                $selectedPlayersContainer.on( 'touchstart', function ( event ) {
                     var $target = $( event.target );
                     if ( $target.hasClass( 'payment-input' ) ) {
                         // Clicked on input - Do nothing
@@ -93,7 +93,7 @@ if ( !window.PlayersController ) {
                     $container.refresh();
                 }
             } );
-            $overlayContainer.find( '.btn.cancel' ).click( function () {
+            $overlayContainer.find( '.btn.cancel' ).on( 'touchstart', function () {
                 if ( cancelCallback ) {
                     cancelCallback.call( this );
                 }
@@ -150,7 +150,7 @@ if ( !window.PlayersController ) {
                         )
                     );
                 } );
-                $playersListContainer.find( '.player-row' ).click( function () {
+                $playersListContainer.find( '.player-row' ).on( 'touchstart', function () {
                     var $this = $( this );
                     $this.toggleClass( 'bg-primary selected' );
                     $playersListContainer = $this.closest( '.players-list-container' );
@@ -191,7 +191,7 @@ if ( !window.PlayersController ) {
                         .text( 'Done' )
                     )
                 );
-                $container.find( '.done' ).click( function () {
+                $container.find( '.done' ).on( 'touchstart', function () {
                     self.addSelectedOverlay.call( self, okCallback, cancelCallback, $container );
                 } );
                 $container.refresh = function () {

@@ -141,6 +141,6 @@ if ( !window.MatchesController ) {
     };
 
     $( document ).ready( function () {
-        $( '.live-match-container .player-row' ).click( window.MatchesController.playerSelected );
+        $( '.live-match-container .player-row' ).on( 'touchstart', window.MatchesController.playerSelected );
     } );
 }
