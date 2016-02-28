@@ -6,6 +6,14 @@ SportOut = ( typeof SportOut !== 'undefined' ) ? SportOut : {
 	}
 };
 $( document ).ready( function () {
+	WebFont.load( {
+		google: {
+			families: [ 'Voltaire:100,300,400,700,900', 'Sigmar+One:100,300,400,700,900', 'Lato:100,300,400,700,900' ]
+		},
+		custom: {
+			families: [ 'Glyphicons Halflings' ]
+		}
+	} );
 	$( '.nav ul li a' ).bind( 'pointerdown', function() {
 		$( 'button.navbar-toggle' ).trigger( 'click' );
 		$( '.content' ).hide();

@@ -15,10 +15,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 
-
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/cyborg/bootstrap.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Voltaire|Sigmar+One|Lato:100,300,400,700,900" type="text/css">
     <link rel="stylesheet" href="css/pickadate/default.css">
     <link rel="stylesheet" href="css/pickadate/default.date.css">
     <link rel="stylesheet" href="css/styles.min.css">
@@ -255,6 +253,7 @@
     <script src="https://code.jquery.com/jquery-1.12.1.min.js"></script>
     <script src="https://code.jquery.com/pep/0.4.1/pep.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/webfont/1.6.21/webfontloader.js"></script>
     <script src="js/playersController.js"></script>
     <script src="js/matchesController.js"></script>
     <script src="js/picker.js"></script>
