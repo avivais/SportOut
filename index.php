@@ -24,7 +24,7 @@
     <title>SportOut</title>
 </head>
 <body>
-    <div class="main-container" touch-action="none">
+    <div class="main-container" touch-action="pan-y">
         <nav class="navbar navbar-default navbar-fixed-top">
             <div class="container-fluid">
                 <div class="navbar-header">
