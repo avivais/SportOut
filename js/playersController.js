@@ -152,7 +152,7 @@ if ( !window.PlayersController ) {
                         )
                     );
                 } );
-                $playersListContainer.find( '.player-row' ).bind( 'pointerdown', function () {
+                $playersListContainer.find( '.player-row' ).bind( 'click', function () {
                     var $this = $( this );
                     $this.toggleClass( 'bg-primary selected' );
                     $playersListContainer = $this.closest( '.players-list-container' );
@@ -193,7 +193,7 @@ if ( !window.PlayersController ) {
                         .text( 'Done' )
                     )
                 );
-                $container.find( '.done' ).bind( 'pointerdown', function () {
+                $container.find( '.done' ).bind( 'click', function () {
                     self.addSelectedOverlay.call( self, okCallback, cancelCallback, $container );
                 } );
                 $container.refresh = function () {
