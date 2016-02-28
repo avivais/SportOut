@@ -17,7 +17,7 @@ if ( !window.PlayersController ) {
             $selectedPlayersContainer = $( '<div class="selected-players">' );
             if ( $selectedPlayers ) {
                 $selectedPlayersContainer.append( $selectedPlayers );
-                $selectedPlayersContainer.on( 'touchstart', function ( event ) {
+                $selectedPlayersContainer.bind( 'pointerdown', function ( event ) {
                     var $target = $( event.target );
                     if ( $target.hasClass( 'payment-input' ) ) {
                         // Clicked on input - Do nothing
@@ -33,13 +33,13 @@ if ( !window.PlayersController ) {
                         $row = $target.closest( '.row.selected-player' );
                         var $paymentInputContainer = $row.find( '.payment-input-container' );
                         var $paymentInput = $paymentInputContainer.find( 'input' );
-                        $paymentInput.off( 'blur' ).on( 'blur', function() {
+                        $paymentInput.unbind( 'blur' ).bind( 'blur', function() {
                             $paymentInputContainer = $( this ).closest( '.payment-input-container' );
                             $paymentInputContainer.addClass( 'hidden' );
                             var updatedPayment = $( this ).val() ? $( this ).val() + " &#8362;" : "";
                             $paymentInputContainer.siblings( '.payment' ).html( updatedPayment ).show();
                         } );
-                        $paymentInput.off( 'keypress' ).on( 'keypress', function( e ) {
+                        $paymentInput.unbind( 'keypress' ).bind( 'keypress', function( e ) {
                             if ( e.keyCode === 13 || e.which === 13 ) {
                                 $paymentInputContainer = $( this ).closest( '.payment-input-container' );
                                 $paymentInputContainer.addClass( 'hidden' );
@@ -55,7 +55,9 @@ if ( !window.PlayersController ) {
 
                         var wasHidden = $paymentInputContainer.hasClass( 'hidden' );
                         if ( wasHidden ) {
-                            $paymentInputContainer.removeClass( 'hidden' );
+                            setTimeout(function() {
+                                $paymentInputContainer.removeClass( 'hidden' );
+                            }, 0)
                             var $paymentContainer = $row.find( '.payment' );
                             $paymentContainer.hide();
                             var payment = parseFloat( $paymentContainer.text() );
@@ -84,7 +86,7 @@ if ( !window.PlayersController ) {
                     )
                 )
             );
-            $overlayContainer.find( '.btn.ok' ).bind( 'click', function () {
+            $overlayContainer.find( '.btn.ok' ).bind( 'pointerdown', function () {
                 if ( okCallback ) {
                     okCallback.call( this, $selectedPlayers );
                 }
@@ -93,7 +95,7 @@ if ( !window.PlayersController ) {
                     $container.refresh();
                 }
             } );
-            $overlayContainer.find( '.btn.cancel' ).on( 'touchstart', function () {
+            $overlayContainer.find( '.btn.cancel' ).bind( 'pointerdown', function () {
                 if ( cancelCallback ) {
                     cancelCallback.call( this );
                 }
@@ -150,7 +152,7 @@ if ( !window.PlayersController ) {
                         )
                     );
                 } );
-                $playersListContainer.find( '.player-row' ).on( 'touchstart', function () {
+                $playersListContainer.find( '.player-row' ).bind( 'pointerdown', function () {
                     var $this = $( this );
                     $this.toggleClass( 'bg-primary selected' );
                     $playersListContainer = $this.closest( '.players-list-container' );
@@ -191,7 +193,7 @@ if ( !window.PlayersController ) {
                         .text( 'Done' )
                     )
                 );
-                $container.find( '.done' ).on( 'touchstart', function () {
+                $container.find( '.done' ).bind( 'pointerdown', function () {
                     self.addSelectedOverlay.call( self, okCallback, cancelCallback, $container );
                 } );
                 $container.refresh = function () {

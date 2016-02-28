@@ -26,7 +26,7 @@
     <title>SportOut</title>
 </head>
 <body>
-    <div class="main-container">
+    <div class="main-container" touch-action="none">
         <nav class="navbar navbar-default navbar-fixed-top">
             <div class="container-fluid">
                 <div class="navbar-header">
@@ -252,7 +252,8 @@
             </div>
         </div>
     </div>
-    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.1.min.js"></script>
+    <script src="https://code.jquery.com/pep/0.4.1/pep.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
     <script src="js/playersController.js"></script>
     <script src="js/matchesController.js"></script>

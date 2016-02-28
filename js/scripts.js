@@ -6,7 +6,7 @@ SportOut = ( typeof SportOut !== 'undefined' ) ? SportOut : {
 	}
 };
 $( document ).ready( function () {
-	$( '.nav ul li a' ).on( 'touchstart', function() {
+	$( '.nav ul li a' ).bind( 'pointerdown', function() {
 		$( 'button.navbar-toggle' ).trigger( 'click' );
 		$( '.content' ).hide();
 		$( '#topNavBar .active' ).removeClass( 'active' );

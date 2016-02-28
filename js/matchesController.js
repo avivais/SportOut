@@ -76,11 +76,11 @@ if ( !window.MatchesController ) {
                 $( '.overlay-container' ).remove();
             }
         },
-        playerSelected: function () {debugger;
+        playerSelected: function () {
             var playerId = $( this ).data( 'playerId' );
             var playerName = $( this ).data( 'playerName' );
             $overlayContainer = window.MatchesController.addOverlay();
-            $overlayContainer.find( '.btn' ).bind( 'click', {
+            $overlayContainer.find( '.btn' ).bind( 'pointerdown', {
                 playerId: playerId,
                 playerName: playerName
             }, function ( event ) {
@@ -141,6 +141,6 @@ if ( !window.MatchesController ) {
     };
 
     $( document ).ready( function () {
-        $( '.live-match-container .player-row' ).on( 'touchstart', window.MatchesController.playerSelected );
+        $( '.live-match-container .player-row' ).bind( 'pointerdown', window.MatchesController.playerSelected );
     } );
 }
