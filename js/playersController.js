@@ -47,7 +47,7 @@ if ( !window.PlayersController ) {
                                 $paymentInputContainer.siblings( '.payment' ).html( updatedPayment ).show();
                             }
                         } );
-                        if ( $target.hasClass( 'clear-button' ) ) {
+                        if ( $target.hasClass( 'clear-button' ) ) {debugger;
                             // Clicked on clear button - Clear input
                             $paymentInput.val( '' );
                             return;
