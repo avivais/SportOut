@@ -86,7 +86,7 @@ if ( !window.PlayersController ) {
                     )
                 )
             );
-            $overlayContainer.find( '.btn.ok' ).bind( 'pointerdown', function () {
+            $overlayContainer.find( '.btn.ok' ).bind( 'pointerup', function () {
                 if ( okCallback ) {
                     okCallback.call( this, $selectedPlayers );
                 }
@@ -95,7 +95,7 @@ if ( !window.PlayersController ) {
                     $container.refresh();
                 }
             } );
-            $overlayContainer.find( '.btn.cancel' ).bind( 'pointerdown', function () {
+            $overlayContainer.find( '.btn.cancel' ).bind( 'pointerup', function () {
                 if ( cancelCallback ) {
                     cancelCallback.call( this );
                 }
